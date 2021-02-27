@@ -6,17 +6,40 @@ import styles from "../styles/pages/Home.module.css"
 
 import Head from 'next/head';
 import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
 import { ChallengeBox } from "../components/ChallengeBox";
 import { CountdownProvider } from "../contexts/CountdownContext";
 import { ChallengesProvider } from "../contexts/ChallengesContext";
 
+import { useSession } from 'next-auth/client'
+import { useEffect, useState } from "react";
 interface HomeProps {
   level: number; 
   currentExperience: number;
   challengesCompleted: number;
 }
+interface ProfileProps {
+  name: string;
+  image: string;
+}
 
 export default function Home(props: HomeProps) {
+  const [ session, loading ] = useSession();
+  const [profile, setProfile] = useState({} as ProfileProps);
+  const router = useRouter();
+
+  useEffect(() => {
+    console.log(session);
+     if(!loading && !session){
+       router.push('/login');
+     }else if(session){
+      setProfile({
+        image: session.user.image,
+        name: session.user.name,
+      })
+     }
+  }, [session, loading]);
+
   return (
     <ChallengesProvider 
       level={props.level}
@@ -33,7 +56,7 @@ export default function Home(props: HomeProps) {
       <CountdownProvider>
         <section>
           <div>
-            <Profile />
+            <Profile name={profile.name} image={profile.image} />
             <CompleteChallenges />
             <Countdown />
           </div>

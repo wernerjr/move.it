@@ -1,0 +1,61 @@
+.loginContainer {
+  background: var(--blue) url('/icons/login.svg') no-repeat left center;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.loginContainer section {
+  padding-right: 20rem;
+
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  align-content: center;
+}
+
+.loginContainer strong {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 46px;
+  color: var(--white);
+}
+
+.loginButton {
+  width: 100%;
+  max-width: 360px;
+
+  height: 5rem;
+
+  padding: 0 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+
+  border: 0;
+  border-radius: 5px;
+
+  background: transparent;
+  color: var(--white);
+
+  font-size: 1.25rem;
+  font-weight: 600;
+
+  transition: background 0.2s;
+}
+
+.loginButton img {
+  padding-right: 1rem;
+}
+
+.loginButton:hover {
+  background: var(--blue-dark);
+}
